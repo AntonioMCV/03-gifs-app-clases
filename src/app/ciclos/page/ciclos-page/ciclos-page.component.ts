@@ -29,6 +29,7 @@ export class CiclosPageComponent
 {
   public isProductVisible: boolean = false;
   public currentPrice: number = 10;
+  public saludos: Array<string> = ['Buenos dias', 'Buenas tardes'];
 
   constructor() {
     console.log('Constructor');
