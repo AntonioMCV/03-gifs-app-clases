@@ -1,0 +1,10 @@
+<div class="p-3">
+  <h3>ciclos-page works!</h3>
+  <button (click)="isProductVisible = !isProductVisible">
+    Toggle Price component
+  </button>
+  <button (click)="increasePrice()">+1 Price</button>
+</div>
+<ciclos-price *ngIf="isProductVisible" [price]="currentPrice">
+  banana
+</ciclos-price>
