@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Gif, SearchResponse } from '../interfaces/gifs.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -24,16 +25,32 @@ export class GifsService {
     this._tagHistory = this._tagHistory.splice(0, 10);
   }
 
+  public gifList: Gif[] = [];
+
   searchTag(tag: string) {
     const params = new HttpParams()
       .set('api_key', this.apiKey)
       .set('limit', '10')
       .set('q', tag);
     if (tag.length === 0) return;
-    this.http.get(`${this.serviceUrl}/search`, { params }).subscribe((resp) => {
-      console.log(resp);
-    });
+    this.http
+      .get<SearchResponse>(`${this.serviceUrl}/search`, { params })
+      .subscribe((resp) => {
+        this.gifList = resp.data;
+      });
     this.organiZeHistory(tag);
-    console.log(this._tagHistory);
+  }
+
+  public gifTrendingList: Gif[] = [];
+
+  getTrendingGifs() {
+    const params = new HttpParams()
+      .set('api_key', this.apiKey)
+      .set('limit', '10');
+    this.http
+      .get<SearchResponse>(`${this.serviceUrl}/trending`, { params })
+      .subscribe((resp) => {
+        this.gifTrendingList = resp.data;
+      });
   }
 }

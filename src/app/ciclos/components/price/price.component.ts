@@ -12,6 +12,7 @@ import { Subscription, interval } from 'rxjs';
   selector: 'ciclos-price',
   templateUrl: './price.component.html',
   styles: '',
+  standalone: true,
 })
 export class PriceComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
@@ -20,9 +21,9 @@ export class PriceComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     console.log('Hijo: ngOnInit');
-    /*     this.interval = interval(1000).subscribe((value) =>
+    this.interval = interval(1000).subscribe((value) =>
       console.log(`Seconds: ${value}`)
-    ); */
+    );
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log('Hijo: ngOnChanges');
@@ -30,6 +31,6 @@ export class PriceComponent implements OnInit, OnChanges, OnDestroy {
   }
   ngOnDestroy(): void {
     console.log('Hijo: ngOnDestroy');
-    /*     this.interval?.unsubscribe(); */
+    this.interval?.unsubscribe();
   }
 }

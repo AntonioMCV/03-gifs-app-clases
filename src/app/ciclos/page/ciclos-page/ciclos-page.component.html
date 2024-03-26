@@ -6,12 +6,24 @@
   <button (click)="increasePrice()">+1 Price</button>
 </div>
 
-<ciclos-price *ngIf="isProductVisible" [price]="currentPrice"></ciclos-price>
+@if (isProductVisible) {
+<ciclos-price [price]="currentPrice">
+  <h6>Listado de saludos:</h6>
+  <ul>
+    @for (saludo of saludos; track $index) {
+    <li>
+      {{ saludo }}
+    </li>
+    }
+  </ul>
+</ciclos-price>
+} @else { no se cumple }
 
-<!--
-<h6>Listado de saludos:</h6>
-<ul>
-  <li>
-  </li>
-</ul>
--->
+<ciclos-price *ngIf="isProductVisible" [price]="currentPrice">
+  <h6>Listado de saludos:</h6>
+  <ul *ngFor="let saludo of saludos">
+    <li>
+      {{ saludo }}
+    </li>
+  </ul>
+</ciclos-price>
